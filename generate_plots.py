@@ -10,6 +10,7 @@ Usage
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def generate_data(seed):
@@ -148,3 +149,31 @@ def plot_boxplot(sensor_a, sensor_b, ax):
 # notebook onto the given Axes object. 
 # NumPy-style docstring. Modifies ax in place, returns None.
 
+def main():
+    """Generate data, render plots, and save the resulting figure.
+
+    The function generates synthetic sensor data using a reproducible seed,
+    creates a 1x3 subplot figure, plots the scatter, histogram, and box
+    plot visualizations onto the provided Axes objects, and saves the
+    figure to disk.
+
+    Returns
+    -------
+    None
+        The function saves the figure as a PNG file and does not return a value.
+    """
+    seed = 389
+    sensor_a, sensor_b, timestamps = generate_data(seed)
+
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    plot_scatter(sensor_a, sensor_b, timestamps, axes[0])
+    plot_histogram(sensor_a, sensor_b, axes[1])
+    plot_boxplot(sensor_a, sensor_b, axes[2])
+
+    fig.tight_layout()
+    fig.savefig('sensor_analysis.png', dpi=150, bbox_inches='tight')
+    plt.close(fig)
+
+
+if __name__ == '__main__':
+    main()
