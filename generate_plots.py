@@ -73,3 +73,78 @@ def plot_scatter(sensor_a, sensor_b, timestamps, ax):
 # Create plot_scatter(sensor_a, sensor_b, timestamps, ax) that draws
 # the scatter plot from the notebook onto the given Axes object.
 # NumPy-style docstring. Modifies ax in place, returns None.
+
+
+def plot_histogram(sensor_a, sensor_b, ax):
+    """Draw overlaid histograms of sensor temperature distributions.
+
+    Parameters
+    ----------
+    sensor_a : numpy.ndarray
+        Array of temperature readings from Sensor A.
+    sensor_b : numpy.ndarray
+        Array of temperature readings from Sensor B.
+    ax : matplotlib.axes.Axes
+        Axes object to draw the histogram on.
+
+    Returns
+    -------
+    None
+        The function modifies the provided Axes in place.
+    """
+    ax.hist(sensor_a, bins=30, alpha=0.5, color='blue', label='Sensor A')
+    ax.hist(sensor_b, bins=30, alpha=0.5, color='orange', label='Sensor B')
+    ax.set_xlabel('Temperature (°C)')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Temperature Distributions of Sensors A and B')
+    ax.axvline(sensor_a.mean(), color='blue', linestyle='--', linewidth=2, label='Sensor A Mean')
+    ax.axvline(sensor_b.mean(), color='orange', linestyle='--', linewidth=2, label='Sensor B Mean')
+    ax.legend()
+
+
+# Create plot_scatter(sensor_a, sensor_b, timestamps, ax) that draws
+# the scatter plot from the notebook onto the given Axes object.
+# NumPy-style docstring. Modifies ax in place, returns None.
+
+#Create plot_histogram(sensor_a, sensor_b, ax) that draws the histogram from the
+# notebook onto the given Axes object. 
+# NumPy-style docstring. Modifies ax in place, returns None.
+
+
+def plot_boxplot(sensor_a, sensor_b, ax):
+    """Draw side-by-side box plots comparing sensor temperature distributions.
+
+    Parameters
+    ----------
+    sensor_a : numpy.ndarray
+        Array of temperature readings from Sensor A.
+    sensor_b : numpy.ndarray
+        Array of temperature readings from Sensor B.
+    ax : matplotlib.axes.Axes
+        Axes object to draw the box plot on.
+
+    Returns
+    -------
+    None
+        The function modifies the provided Axes in place.
+    """
+    ax.boxplot([sensor_a, sensor_b], tick_labels=['Sensor A', 'Sensor B'])
+    ax.set_xlabel('Sensor')
+    ax.set_ylabel('Temperature (°C)')
+    ax.set_title('Box Plot Comparison of Sensor A and B Temperatures')
+    overall_mean = np.concatenate([sensor_a, sensor_b]).mean()
+    ax.axhline(overall_mean, color='red', linestyle='--', linewidth=2, label=f'Overall Mean: {overall_mean:.2f}°C')
+    ax.legend()
+
+# Create plot_scatter(sensor_a, sensor_b, timestamps, ax) that draws
+# the scatter plot from the notebook onto the given Axes object.
+# NumPy-style docstring. Modifies ax in place, returns None.
+
+#Create plot_histogram(sensor_a, sensor_b, ax) that draws the histogram from the
+# notebook onto the given Axes object. 
+# NumPy-style docstring. Modifies ax in place, returns None.
+
+#Create a plot_box(sensor_a, sensor_b, ax) function that draws the box plot from the 
+# notebook onto the given Axes object. 
+# NumPy-style docstring. Modifies ax in place, returns None.
+
