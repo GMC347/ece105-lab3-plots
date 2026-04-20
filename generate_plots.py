@@ -165,10 +165,21 @@ def main():
     seed = 389
     sensor_a, sensor_b, timestamps = generate_data(seed)
 
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    axes = axes.flatten()
+
     plot_scatter(sensor_a, sensor_b, timestamps, axes[0])
     plot_histogram(sensor_a, sensor_b, axes[1])
     plot_boxplot(sensor_a, sensor_b, axes[2])
+
+    summary_ax = axes[3]
+    summary_ax.axis('off')
+    summary_text = (
+        f"Sensor A: mean={sensor_a.mean():.2f} °C, std={sensor_a.std():.2f} °C\n"
+        f"Sensor B: mean={sensor_b.mean():.2f} °C, std={sensor_b.std():.2f} °C\n"
+        f"Combined mean={np.concatenate([sensor_a, sensor_b]).mean():.2f} °C"
+    )
+    summary_ax.text(0.5, 0.5, summary_text, ha='center', va='center', fontsize=12)
 
     fig.tight_layout()
     fig.savefig('sensor_analysis.png', dpi=150, bbox_inches='tight')
